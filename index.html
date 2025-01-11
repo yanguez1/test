@@ -1,22 +1,155 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web</title>
+    <title>Página Pesada con Animaciones</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
             text-align: center;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        section {
             padding: 50px;
         }
-        h1 {
-            color: #2c3e50;
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform: scale(1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #111;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body>
-    <h1>¡Hola, bienvenido a mi sitio web!</h1>
-    <p>Esta es mi primera página creada con GitHub Pages.</p>
+    <header>
+        <h1>Bienvenido a Mi Web Pesada</h1>
+    </header>
+
+    <section>
+        <h2 class="section-title">Galería de Tarjetas</h2>
+        <div class="card-grid" id="card-grid">
+            <!-- Las tarjetas se añadirán aquí dinámicamente -->
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Interacción con Botón</h2>
+        <button class="button" id="add-cards-button">Añadir Más Tarjetas</button>
+    </section>
+
+    <footer>
+        <p>Creado con HTML, CSS y JavaScript. Página de ejemplo pesada 🌐🚀</p>
+    </footer>
+
+    <script>
+        // Generador de tarjetas pesadas
+        function crearTarjeta(id) {
+            return `
+                <div class="card">
+                    <h3>Tarjeta ${id}</h3>
+                    <p>Esta es una tarjeta con contenido y efectos visuales. El ID de la tarjeta es ${id}.</p>
+                    <p style="font-size: 12px; color: grey;">Contenido dinámico cargado con JavaScript.</p>
+                </div>
+            `;
+        }
+
+        const cardGrid = document.getElementById('card-grid');
+        const button = document.getElementById('add-cards-button');
+
+        // Cargar tarjetas iniciales
+        for (let i = 1; i <= 10; i++) {
+            cardGrid.innerHTML += crearTarjeta(i);
+        }
+
+        let contadorTarjetas = 10;
+
+        // Añadir más tarjetas cuando se haga clic en el botón
+        button.addEventListener('click', () => {
+            for (let i = 0; i < 5; i++) {
+                contadorTarjetas++;
+                cardGrid.innerHTML += crearTarjeta(contadorTarjetas);
+            }
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
+
 </html>
